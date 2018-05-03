@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Classify</string>
+    <string name="hint_gender">I am</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_dob">Date of Birth</string>
+    <string name="hint_password">Password</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="btn_sign_up">REGISTER</string>
+    <string name="btn_link_login">Already have an account?</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_link_signup">Dont have an account?</string>
+    <string name="title_activity_main">Classify</string>
+    <string name="spinnerTitle">Grading Rubric</string>
+    <string-array name="rubric_array">
+        <item>Add a grading rubric</item>
+        <item>Attendance</item>
+        <item>Exams</item>
+        <item>Final Exam</item>
+        <item>Homework</item>
+        <item>Midterm Exam</item>
+        <item>Projects</item>
+        <item>Quizzes</item>
+    </string-array>
+</resources>

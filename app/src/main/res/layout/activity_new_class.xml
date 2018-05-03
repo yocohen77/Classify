@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.example.android.classify.newClass">
+
+    <!-- Structural guidelines -->
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="48dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="579dp" />
+
+    <!-- Class image icon and textview -->
+    <ImageView
+        android:id="@+id/class_image"
+        style="@style/icon_dim"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editDate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/classNameInput"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/classNameInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginRight="16dp"
+        android:textColorHint="@color/Gray"
+        app:layout_constraintBottom_toTopOf="@id/editDate"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class name" />
+    </android.support.design.widget.TextInputLayout>
+    <!-- Date image icon and custom date picker -->
+    <ImageView
+        android:id="@+id/date_image"
+        style="@style/icon_dim"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/startTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/editDate"
+        app:layout_constraintTop_toBottomOf="@+id/classNameInput"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <TextView
+        android:id="@+id/editDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:hint="Days"
+        android:inputType="date"
+        android:paddingLeft="4dp"
+        android:textSize="18sp"
+        android:textColor="@color/Gray"
+        app:layout_constraintBottom_toTopOf="@id/startTime"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classNameInput" />
+
+    <!-- Start and end time icon and time picker view -->
+    <ImageView
+        android:id="@+id/time_image"
+        style="@style/icon_dim"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editProfLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editDate"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:hint="Start"
+        android:paddingLeft="4dp"
+        android:textSize="18sp"
+        android:textColor="@color/Gray"
+        app:layout_constraintBottom_toTopOf="@id/editProfLayout"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toLeftOf="@id/endTime"
+        app:layout_constraintTop_toBottomOf="@id/editDate" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editDate"
+        android:layout_marginRight="16dp"
+        android:hint="End"
+        android:textSize="18sp"
+        android:textColor="@color/Gray"
+        app:layout_constraintBottom_toTopOf="@id/editProfLayout"
+        app:layout_constraintLeft_toRightOf="@id/startTime"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editDate" />
+
+    <!-- Professor name and icon -->
+    <ImageView
+        android:id="@+id/contact_image"
+        style="@style/icon_dim"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/rubric_spinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/startTime"
+        app:srcCompat="@drawable/ic_person_outline" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/editProfLayout"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:textColorHint="@color/Gray"
+        app:layout_constraintBottom_toTopOf="@+id/rubric_spinner"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startTime">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editProf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Professor" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Grading rubric, includes:
+        A grading icon
+        A spinner with different rubrics
+        A listview that holds the chosen rubric
+        Listview row layout is implented in list_view_row.xml
+     -->
+    <ImageView
+        android:id="@+id/grades_image"
+        style="@style/icon_dim"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editProfLayout"
+        app:srcCompat="@drawable/ic_grade" />
+
+    <Spinner
+        android:id="@+id/rubric_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="4dp"
+        android:prompt="@string/spinnerTitle"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/list_view"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editProfLayout" />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        style="@style/ListView"
+        app:layout_constraintTop_toBottomOf="@id/rubric_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"/>
+    <!-- android:visibility="invisible" -->
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
