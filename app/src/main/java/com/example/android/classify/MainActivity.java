@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.util.Log;
-import android.content.Intent;
-import android.os.Bundle;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent newClassIntent = new Intent(MainActivity.this, newClass.class);
-                startActivity(newClassIntent);
+                startActivityForResult(newClassIntent, 1);
             }
         });
 

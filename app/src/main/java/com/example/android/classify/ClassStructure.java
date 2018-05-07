@@ -18,7 +18,8 @@ public class ClassStructure {
         this.timeEnd = timeEnd;
         setDays(updateDays);
     }
-
+    // empty constructor
+    ClassStructure(){};
     public void setProf(String name){
         profName = name;
     }

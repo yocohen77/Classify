@@ -3,6 +3,7 @@ package com.example.android.classify;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,18 +23,19 @@ import android.util.Log;
 import java.util.ArrayList;
 
 
-/**
- * @param hour holds the start and end times for formatting purposes
- * @param minute holds the minutes for formatting purposes
- * @param spinnerPos used to copy the spinner position in order to manipulate from within function
- * @param weightInput grabs the weight from an edit text field and passes it to an array adapter
- */
+
 
 public class newClass extends AppCompatActivity {
-     int hour, minute;
+    /**
+     * @param hour holds the start and end times for formatting purposes
+     * @param minute holds the minutes for formatting purposes
+     * @param spinnerPos used to copy the spinner position in order to manipulate from within function
+     * @param weightInput grabs the weight from an edit text field and passes it to an array adapter
+     */
+    int hour, minute;
     String format, days, weightInput;
     int spinnerPos;
-    ClassStructure newClass;
+    ClassStructure newClass = new ClassStructure();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,7 @@ public class newClass extends AppCompatActivity {
         // create the adapter to convert the array to views
         final RubricAdapter listAdapter = new RubricAdapter(this, arrayOfRubrics);
         // attach
-        ListView listView = findViewById(R.id.list_view);
+        final ListView listView = findViewById(R.id.list_view);
         listView.setAdapter(listAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -134,30 +136,44 @@ public class newClass extends AppCompatActivity {
                             if(spinnerPos == 1) {
                                 RubricType newRubric = new RubricType("Attendance",weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setAttendanceWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 2) {
                                 RubricType newRubric = new RubricType("Exams", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setExamWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 3) {
                                 RubricType newRubric = new RubricType("Final Exam", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setFinalWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 4) {
                                 RubricType newRubric = new RubricType("Homework", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setHomeworkWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 5) {
                                 RubricType newRubric = new RubricType("Midterm Exam", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setMidtermWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 6) {
                                 RubricType newRubric = new RubricType("Projects", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setProjectWeight(Integer.parseInt(weightInput));
                             }
                             if(spinnerPos == 7){
                                 RubricType newRubric = new RubricType("Quizes", weightInput+"%");
                                 listAdapter.add(newRubric);
+                                if (weightInput != null && !weightInput.isEmpty())
+                                    newClass.setQuizWeight(Integer.parseInt(weightInput));
                             }
                             // set spinner back to default value (head)
                             spinner.setSelection(0);
@@ -187,13 +203,14 @@ public class newClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String updateProf = profName.getText().toString();
-                String updateName = className.getText().toString();
+                String updateSubject = className.getText().toString();
                 String updateStart = startTime.getText().toString();
                 String updateEnd = endTime.getText().toString();
                 String updateDate = classDate.getText().toString();
-                newClass = new ClassStructure(updateProf, updateName, updateStart, updateEnd, updateDate);
-                Log.i("TESTING", "Data: " + updateProf + " " + updateName + " " + updateStart
-                + " " + updateEnd + " " + updateDate);
+                newClass.setProf(updateProf);
+                newClass.setTimes(updateStart, updateEnd);
+                newClass.setSubject(updateSubject);
+                newClass.setDays(updateDate);
             }
         });
     }
