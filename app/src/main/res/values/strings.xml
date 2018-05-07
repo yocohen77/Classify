@@ -6,10 +6,11 @@
     <string name="hint_password">Password</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="btn_sign_up">REGISTER</string>
-    <string name="btn_link_login">Already have an account?</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_link_signup">Dont have an account?</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="txt_login">Already have an account?</string>
+    <string name="txt_link_login">Login!</string>
+    <string name="txt_sign_up">Don\'t have an account?</string>
+    <string name="btn_sign_up_link">Create one!</string>
     <string name="title_activity_main">Classify</string>
     <string name="spinnerTitle">Grading Rubric</string>
     <string-array name="rubric_array">
@@ -22,4 +23,18 @@
         <item>Projects</item>
         <item>Quizzes</item>
     </string-array>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_in">Log in</string>
+    <string name="action_register">Register</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>

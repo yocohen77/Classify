@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <!-- previous primary dark - #303F9F -->
+    <color name="colorPrimaryDark">#000b7b</color>
     <color name="colorAccent">#FF4081</color>
     <color name="LightSkyBlue">#87cefa</color>
     <color name="Black">#000000</color>
     <color name="White">#FFFFFF</color>
     <color name="Gray">#757575</color>
+    <color name="ClassifyLightBlue">#4894CA</color>
+    <color name="ClassifyBlue">#000b7b</color>
 </resources>
