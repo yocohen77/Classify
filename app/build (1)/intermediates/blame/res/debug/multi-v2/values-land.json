@@ -1,0 +1,55 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\yocoh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c6bffa7745b69312c17e52a9f2f73ef2\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,125,189,260",
+                        "endColumns": "69,63,70,67",
+                        "endOffsets": "120,184,255,323"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\yocoh\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.1.0.aar\\81422c6a17c38ac556fc9bc992de96bc\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,110,161,211,258,307,356,413,469,524,580",
+                        "endColumns": "54,50,49,46,48,48,56,55,54,55,54",
+                        "endOffsets": "105,156,206,253,302,351,408,464,519,575,630"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "328,383,434,484,531,580,629,686,742,797,853",
+                        "endColumns": "54,50,49,46,48,48,56,55,54,55,54",
+                        "endOffsets": "378,429,479,526,575,624,681,737,792,848,903"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\yocoh\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\41b3a6db88a42391d53935307de69faa\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "232"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "908",
+                        "endLines": "20",
+                        "endColumns": "12",
+                        "endOffsets": "1085"
+                    }
+                }
+            ]
+        }
+    ]
+}

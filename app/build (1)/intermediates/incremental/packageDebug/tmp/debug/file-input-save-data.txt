@@ -1,0 +1,31 @@
+#Internal package file, do not edit.
+#Tue May 01 12:02:04 EDT 2018
+2.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+5.set=ASSET
+0.path=fonts/Roboto-Light.ttf
+2.baseType=DIRECTORY
+3.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\assets\\debug
+2.set=DEX
+1.path=fonts/Roboto-Bold.ttf
+4.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+count=7
+5.baseType=DIRECTORY
+2.path=classes.dex
+5.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\assets\\debug
+4.set=DEX
+3.path=zone.tab
+6.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\assets\\debug
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=classes.dex
+6.set=ASSET
+1.baseType=DIRECTORY
+6.baseType=DIRECTORY
+5.path=backward
+0.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\assets\\debug
+0.baseType=DIRECTORY
+3.set=ASSET
+6.path=fonts/AndroidClockMono-Thin.ttf
+1.base=C\:\\Users\\yocoh\\Google Drive\\Android Development\\Classify\\app\\build\\intermediates\\assets\\debug
+4.baseType=DIRECTORY
+0.set=ASSET
