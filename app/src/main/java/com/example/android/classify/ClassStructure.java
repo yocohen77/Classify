@@ -1,5 +1,8 @@
 package com.example.android.classify;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by yocoh on 3/20/2018.
  */
@@ -8,18 +11,12 @@ public class ClassStructure {
     private String profName;
     private String subject;
     private String timeStart, timeEnd;
-    private boolean days[] = new boolean[7];
+    private String days;
     private int quizWeight, examWeight, midtermWeight, finalWeight, projectWeight, homeworkWeight, attendanceWeight;
+    private float rating;
+    // default constructor
+    ClassStructure(){    };
 
-    ClassStructure(String profName, String subject, String timeStart, String timeEnd, String updateDays){
-        this.profName = profName;
-        this.subject = subject;
-        this.timeStart = timeStart;
-        this.timeEnd = timeEnd;
-        setDays(updateDays);
-    }
-    // empty constructor
-    ClassStructure(){};
     public void setProf(String name){
         profName = name;
     }
@@ -33,24 +30,9 @@ public class ClassStructure {
         return subject;
     }
     public void setDays (String d){
-        for (int i = 1; i <= 7; ++i){
-            if (d.contains("Sun"))
-                days[1] = true;
-            if (d.contains("Mon"))
-                days[2] = true;
-            if (d.contains("Tue"))
-                days[3] = true;
-            if (d.contains("Wed"))
-                days[4] = true;
-            if (d.contains("Thu"))
-                days[5] = true;
-            if (d.contains("Fri"))
-                days[6] = true;
-            if (d.contains("Sat"))
-                days[7] = true;
-        }
+        days = d;
     }
-    public boolean[] getDays(){
+    public String getDays(){
         return days;
     }
     public void setTimes(String start, String end){
@@ -104,5 +86,52 @@ public class ClassStructure {
     }
     public int getAttendanceWeight(){
         return attendanceWeight;
+    }
+    public void calculateRating(float result){
+        result = result/100;
+        rating = roundToHalf(result * 5);
+    };
+    public float getRating(){ return rating; };
+//    public float calculateGrade(){
+//
+//
+//
+//        // calculate and set the rating
+//        // calculateRating(result);
+//
+//        /*
+//         if (result >= 97)
+//            return "A+";
+//         else if (result < 97 && result >= 93)
+//            return "A";
+//         else if (result < 93 && result >= 90)
+//            return "A-";
+//         else if (result < 90 && result >= 87)
+//            return "B+";
+//         else if (result < 87 && result >= 83)
+//            return "B";
+//         else if (result < 83 && result >= 80)
+//            return "B-";
+//         else if (result < 80 && result >= 77)
+//            return "C+";
+//         else if (result < 77 && result >= 73)
+//            return "C";
+//         else if (result < 73 && result >= 70)
+//            return "C-";
+//         else if (result < 70 && result >= 67)
+//            return "D+";
+//         else if (result < 67 && result >= 63)
+//            return "D";
+//         else if (result < 63 && result >= 60)
+//            return "D-";
+//         else
+//            return "F";
+//         */
+//
+//
+//    }
+
+    public float roundToHalf(float num){
+        return Math.round(num * 2) / 2.0f;
     }
 }

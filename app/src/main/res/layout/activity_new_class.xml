@@ -154,7 +154,7 @@
         A grading icon
         A spinner with different rubrics
         A listview that holds the chosen rubric
-        Listview row layout is implented in list_view_row.xml
+        Listview row layout is implented in grading_list_view_row.xml_row.xml
      -->
     <ImageView
         android:id="@+id/grades_image"

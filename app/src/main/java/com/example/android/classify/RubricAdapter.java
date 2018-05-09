@@ -20,12 +20,11 @@ public class RubricAdapter extends ArrayAdapter<RubricType> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        Log.i("TESTING", "Clicking on position: " + position);
         // get the data item for this position
         RubricType rubricType = getItem(position);
         // check if an existing view is being used, otherwise inflate the view
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.grading_list_view_row, parent, false);
         }
         // Lookup value for data population
         TextView rubricName = (TextView) convertView.findViewById(R.id.rubric_type);

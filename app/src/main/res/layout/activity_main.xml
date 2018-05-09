@@ -6,28 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.classify.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Classify"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textSize="22sp"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="match_parent"/>
 
 
     <!-- Add a class/note menu -->

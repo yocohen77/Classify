@@ -20,12 +20,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.util.Log;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 
 
 
 public class newClass extends AppCompatActivity {
+
+    String TAG = "ClassifyNewClass";
     /**
      * @param hour holds the start and end times for formatting purposes
      * @param minute holds the minutes for formatting purposes
@@ -36,6 +42,8 @@ public class newClass extends AppCompatActivity {
     String format, days, weightInput;
     int spinnerPos;
     ClassStructure newClass = new ClassStructure();
+
+    DatabaseReference databaseClasses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,8 @@ public class newClass extends AppCompatActivity {
         final TextView classDate = (TextView) findViewById(R.id.editDate);
         final TextInputEditText profName = (TextInputEditText) findViewById(R.id.editProf);
         final Button saveButton = (Button) findViewById(R.id.saveButton);
+
+        databaseClasses = FirebaseDatabase.getInstance().getReference("classes");
 
         // create a fragment for time set
         startTime.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +102,7 @@ public class newClass extends AppCompatActivity {
                         classDate.setText(days);
                     }
                 });
-                Log.i("ERROR CHECKING", "cdp.days from newClass is: " + cdp.days);
+                Log.i(TAG, "classDate:setOnClickListener:" + cdp.days);
 
             }
         });
@@ -211,6 +221,13 @@ public class newClass extends AppCompatActivity {
                 newClass.setTimes(updateStart, updateEnd);
                 newClass.setSubject(updateSubject);
                 newClass.setDays(updateDate);
+
+                // create unique id for this class to be used in the database
+                String classId = databaseClasses.push().getKey();
+                databaseClasses.child(classId).setValue(newClass);
+                Log.i(TAG, "DatabaseClasses added with ID: " + classId);
+                startActivity(new Intent(newClass.this, MainActivity.class));
+                finish();
             }
         });
     }
