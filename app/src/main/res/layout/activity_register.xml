@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/ClassifyLightBlue"
             android:padding="20dp"
             android:text="@string/action_register"
             android:textColor="#AAFFFFFF"
@@ -126,13 +126,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="298dp" />
+        app:layout_constraintGuide_end="300dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/top_image_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="81dp" />
+        app:layout_constraintGuide_begin="80dp" />
 
 </android.support.constraint.ConstraintLayout>

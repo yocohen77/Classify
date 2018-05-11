@@ -36,7 +36,8 @@
             android:label="My Classes" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".classView"></activity>
     </application>
 
 </manifest>

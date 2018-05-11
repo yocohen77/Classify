@@ -1,12 +1,17 @@
 package com.example.android.classify;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.util.Log;
 import android.widget.ListView;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     ListView classListView ;
     DatabaseReference databaseClasses;
     List<ClassStructure> classList;
+    FloatingActionButton classButton;
+    FloatingActionButton reminderButton;
+    FloatingActionMenu menuButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseClasses = FirebaseDatabase.getInstance().getReference("classes");
         classList = new ArrayList<>();
-        FloatingActionButton classButton = (FloatingActionButton) findViewById(R.id.menu_class);
-        FloatingActionButton reminderButton = (FloatingActionButton) findViewById(R.id.menu_reminder);
+        classButton = (FloatingActionButton) findViewById(R.id.menu_class);
+        reminderButton = (FloatingActionButton) findViewById(R.id.menu_reminder);
+        menuButton = findViewById(R.id.menu);
         classListView = findViewById(R.id.listView);
+        classListView.setEmptyView(findViewById(R.id.emptyview));
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -55,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newReminderIntent);
             }
         });
+        redrawLayout();
 
     }
 
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         databaseClasses.addValueEventListener(new ValueEventListener() {
             @Override
             // executed whenever data is changed in the database
@@ -77,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ClassAdapter adapter = new ClassAdapter(MainActivity.this, classList);
                 classListView.setAdapter(adapter);
+                redrawLayout();
             }
             // executed when error occured
             @Override
@@ -85,6 +98,49 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // if the list view adapter is empty, restyle the layout
+    private void redrawLayout(){
+        if (classListView.getCount() == 0){
+            this.getSupportActionBar().hide();
+            // set colors for menu button
+            menuButton.setMenuButtonColorNormal(Color.WHITE);
+            // change the color of the icon inside the menu button
+            menuButton.getMenuIconView().setColorFilter(Color.BLUE);
+            // set colors for floating buttons
+            classButton.setColorNormal(Color.WHITE);
+            reminderButton.setColorNormal(Color.WHITE);
+            // set icon colors for floating buttons
+            Drawable myFabSrc = ContextCompat.getDrawable(this, R.drawable.ic_class_icon);
+            Drawable whiteIcon = myFabSrc.getConstantState().newDrawable();
+            whiteIcon.mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
+            classButton.setImageDrawable(whiteIcon);
+            myFabSrc = ContextCompat.getDrawable(this, R.drawable.ic_reminder_icon);
+            whiteIcon = myFabSrc.getConstantState().newDrawable();
+            whiteIcon.mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
+            reminderButton.setImageDrawable(whiteIcon);
+
+        }
+        else if (classListView.getCount() == 1) {
+            this.getSupportActionBar().show();
+            // set menu color back to default
+            menuButton.setMenuButtonColorNormalResId(R.color.colorPrimaryDark);
+            // change menu icon color back to white
+            menuButton.getMenuIconView().setColorFilter(Color.WHITE);
+            // same for floating buttons
+            classButton.setColorNormalResId(R.color.colorPrimaryDark);
+            reminderButton.setColorNormalResId(R.color.colorPrimaryDark);
+            // icons
+            Drawable myFabSrc = ContextCompat.getDrawable(this, R.drawable.ic_class_icon);
+            Drawable blueIcon = myFabSrc.getConstantState().newDrawable();
+            blueIcon.mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            classButton.setImageDrawable(blueIcon);
+            myFabSrc = ContextCompat.getDrawable(this, R.drawable.ic_reminder_icon);
+            blueIcon = myFabSrc.getConstantState().newDrawable();
+            blueIcon.mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            reminderButton.setImageDrawable(blueIcon);
+        }
     }
 
 }

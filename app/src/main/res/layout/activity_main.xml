@@ -11,7 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <!-- empty view -->
+    <RelativeLayout
+        android:id="@+id/emptyview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ClassifyBlue"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="110dp"
+            android:background="@drawable/addaclass"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
 
+    </RelativeLayout>
     <!-- Add a class/note menu -->
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -20,7 +34,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/fab_add"
-        fab:menu_colorNormal="#4052b5"
+        fab:menu_colorNormal="#000b7b"
         fab:menu_colorPressed="#778cff">
 
         <!-- sub menus -->
@@ -28,20 +42,22 @@
             android:id="@+id/menu_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_star"
+            android:src="@drawable/ic_class_icon"
             android:layout_margin="16dp"
             fab:fab_size="mini"
             fab:fab_label="Add a new class"
-            app:fab_colorNormal="#ff8a80"/>
+            app:fab_colorNormal="#000b7b"
+            fab:menu_colorPressed="#778cff"/>
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_reminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_star"
+            android:src="@drawable/ic_reminder_icon"
             android:layout_margin="16dp"
             fab:fab_size="mini"
             fab:fab_label="Add a reminder"
-            app:fab_colorNormal="#ff8a80"/>
+            app:fab_colorNormal="#000b7b"
+            fab:menu_colorPressed="#778cff"/>
     </com.github.clans.fab.FloatingActionMenu>
 
 
