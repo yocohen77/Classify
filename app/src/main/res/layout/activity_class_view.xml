@@ -1,9 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".classView">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/AppTheme">
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:id="@+id/class_view_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CSCI 355"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/White"/>
+
+            <TextView
+                android:id="@+id/class_view_professor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/class_view_subject"
+                android:text="Benjamin Garrett"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="@color/White" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/txt_dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ic_dates"
+        android:gravity="center"
+        android:text="placeholder text"
+        android:textColor="@color/Black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar" />
+
+    <TextView
+        android:id="@+id/txt_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ic_location"
+        android:gravity="center"
+        android:text="placeholder text"
+        android:textColor="@color/Black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_dates" />
+
+    <TextView
+        android:id="@+id/txt_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ic_grade"
+        android:gravity="center"
+        android:text="placeholder text"
+        android:textColor="@color/Black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_location" />
+
+    <View
+        android:id="@+id/div1"
+        style="@style/Divider"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_grade" />
+
+    <TextView
+        android:id="@+id/txt_grades_due"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/grade_standing"
+        android:textAppearance="@style/medium_bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/div1"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ExpandableListView
+        android:id="@+id/exp_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_grades_due"/>
+
+
 
 </android.support.constraint.ConstraintLayout>

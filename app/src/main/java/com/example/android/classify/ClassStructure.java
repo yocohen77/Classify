@@ -1,5 +1,6 @@
 package com.example.android.classify;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,15 +8,24 @@ import java.util.List;
  * Created by yocoh on 3/20/2018.
  */
 
-public class ClassStructure {
+public class ClassStructure implements Serializable {
     private String profName;
     private String subject;
     private String timeStart, timeEnd;
     private String days;
     private int quizWeight, examWeight, midtermWeight, finalWeight, projectWeight, homeworkWeight, attendanceWeight;
     private float rating;
+    public List<GradeType> quizzes, exams, midterms, finals, projects, homework, attendance;
     // default constructor
-    ClassStructure(){    };
+    public ClassStructure(){
+        quizzes = new ArrayList<>();
+        exams = new ArrayList<>();
+        midterms = new ArrayList<>();
+        finals = new ArrayList<>();
+        projects = new ArrayList<>();
+        homework = new ArrayList<>();
+        attendance = new ArrayList<>();
+    };
 
     public void setProf(String name){
         profName = name;

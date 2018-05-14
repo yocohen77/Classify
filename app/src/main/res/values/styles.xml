@@ -1,25 +1,42 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">#AAFFFFFF</item>
     </style>
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent ="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <!-- alert dialog styles -->
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="android:colorAccent">@color/ClassifyLightBlue</item>
+        <item name="android:textColorPrimary">@color/ClassifyLightBlue</item>
+    </style>
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/ClassifyLightBlue</item>
+    </style>
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/ClassifyLightBlue</item>
+    </style>
+
     <!-- new class icon dims -->
     <style name="icon_dim">
         <item name="android:layout_width">24dp</item>
         <item name="android:layout_height">24dp</item>
         <item name="android:tint">#4052b5</item>
     </style>
+
     <!-- login & register text layout -->
     <style name="RegLoginTextLayout" parent="@android:style/TextAppearance">
         <item name="colorAccent">#FFFFFF</item>
@@ -31,24 +48,33 @@
         <item name="android:textColorHighlight">@color/colorAccent</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <!-- login & registration edit text -->
     <style name="RegLoginEditText">
         <item name="android:paddingBottom">16dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
     </style>
+
     <!-- List view styling -->
     <style name ="ListView" parent="@android:style/Widget.ListView">
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">4dp</item>
     </style>
+
     <!-- Rating Bar Style -->
     <style name="AppThemeRatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/Gold</item>
         <item name="colorControlActivated">@color/Gold</item>
     </style>
 
+    <!-- Divider -->
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -57,6 +83,7 @@
         <item name="android:background">@drawable/toggle_bg</item>
     </style>
 
+    <!-- toggle buttons -->
     <style name="toggleButton" parent="@android:style/Theme.DeviceDefault">
         <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
         <item name="android:textColor">@drawable/toggle_text_color</item>

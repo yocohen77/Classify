@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.util.Log;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -66,8 +67,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         redrawLayout();
-
+        classListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClassStructure c = classList.get(position);
+                Intent classIntent = new Intent(MainActivity.this, classView.class);
+                classIntent.putExtra("passedClass", c);
+                startActivity(classIntent);
+            }
+        });
     }
+
+    /* when a class is clicked, grab the class object from the list
+     * and launch a new activity with the object
+     */
+
 
     // attach the data event listener to the database
     @Override
@@ -84,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 // grab the values from the database
                 for (DataSnapshot classSnapshot : dataSnapshot.getChildren()){
                     ClassStructure c = classSnapshot.getValue(ClassStructure.class);
-                    Log.d("Testing", "c subject is: " + c.getSubject());
+                    Log.d("Testing", "c time is: " + c.getTimeStart() + " - " + c.getTimeEnd());
                     classList.add(c);
                 }
                 ClassAdapter adapter = new ClassAdapter(MainActivity.this, classList);
@@ -103,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     // if the list view adapter is empty, restyle the layout
     private void redrawLayout(){
         if (classListView.getCount() == 0){
-            this.getSupportActionBar().hide();
+            //this.getSupportActionBar().hide();
             // set colors for menu button
             menuButton.setMenuButtonColorNormal(Color.WHITE);
             // change the color of the icon inside the menu button
@@ -122,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
             reminderButton.setImageDrawable(whiteIcon);
 
         }
-        else if (classListView.getCount() == 1) {
-            this.getSupportActionBar().show();
+        else if (classListView.getCount() > 1) {
+            //this.getSupportActionBar().show();
             // set menu color back to default
             menuButton.setMenuButtonColorNormalResId(R.color.colorPrimaryDark);
             // change menu icon color back to white

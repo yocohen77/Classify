@@ -25,6 +25,10 @@
     </string-array>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- Strings related to class view -->
+    <string name="grade_standing">Grades received for this class</string>
+    <string name="add_new_grade">Add a new grade</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

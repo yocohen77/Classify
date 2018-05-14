@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.classify">
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -36,8 +36,11 @@
             android:label="My Classes" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".classView"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".classView"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:parentActivityName="com.example.android.classify.MainActivity"/>
     </application>
 
 </manifest>
