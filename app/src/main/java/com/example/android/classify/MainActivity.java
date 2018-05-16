@@ -24,6 +24,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    final String TAG = "ClassifyMainActivity";
     /*
      * @param classListView the list view that holds the classes
      * @param databaseClasses reference to the firebase database
@@ -66,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newReminderIntent);
             }
         });
+        // attach data from database
         redrawLayout();
+
+        /* when a class is clicked, grab the class object from the list
+         * and launch a new activity with the object
+         */
         classListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /* when a class is clicked, grab the class object from the list
-     * and launch a new activity with the object
-     */
-
 
     // attach the data event listener to the database
     @Override
@@ -92,13 +94,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             // executed whenever data is changed in the database
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("Testing", "databaseClasses:onDataChange:true");
+                Log.d(TAG, "databaseClasses:onDataChange:true");
                 // clear the list if previously loaded
                 classList.clear();
                 // grab the values from the database
                 for (DataSnapshot classSnapshot : dataSnapshot.getChildren()){
                     ClassStructure c = classSnapshot.getValue(ClassStructure.class);
-                    Log.d("Testing", "c time is: " + c.getTimeStart() + " - " + c.getTimeEnd());
                     classList.add(c);
                 }
                 ClassAdapter adapter = new ClassAdapter(MainActivity.this, classList);
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             // executed when error occured
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("Testing", "databaseClasses:onCancelled:true");
+                Log.d(TAG, "databaseClasses:onCancelled:true");
 
             }
         });

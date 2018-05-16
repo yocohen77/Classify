@@ -2,8 +2,6 @@ package com.example.android.classify;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class classView extends AppCompatActivity {
@@ -32,24 +29,26 @@ public class classView extends AppCompatActivity {
     final private String TAG = "TestingClassView";
 
     ClassStructure mClass;
-    TextView subject, professor;
+    TextView txtSubject, txtProf, txtLocation, txtGrade, txtDates;
     ExpandableListAdapter expListAdapter;
     ExpandableListView expListView;
     List<String> expListParent;
-    HashMap<String, List<GradeType>> expListChild;
+    HashMap<String, List<String>> expListChild;
+    DatabaseReference classRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_view);
-
+        // get database reference
+        classRef = FirebaseDatabase.getInstance().getReference("classes");
         // get the class that was passed from main activity
         Intent i = getIntent();
         mClass = (ClassStructure) i.getSerializableExtra("passedClass");
         Log.d(TAG, "onCreate:true, mClass: " + mClass.getSubject());
         // initialize lists for expanding list view and send to adapter
         expListParent = new ArrayList<String>();
-        expListChild = new HashMap<String, List<GradeType>>();
+        expListChild = new HashMap<String, List<String>>();
 
         // set up an up button
         Toolbar myToolBar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -62,28 +61,35 @@ public class classView extends AppCompatActivity {
         // set class variables
         String timeDate = mClass.getTimeStart() + " - " + mClass.getTimeEnd() + ", " +
                 mClass.getDays();
-        TextView txtDates = findViewById(R.id.txt_dates);
-        txtDates.setText(timeDate);
-        // hide list's indicator
+
+        // attach list's indicator
         expListView = (ExpandableListView) findViewById(R.id.exp_list);
-        expListView.setGroupIndicator(null);
 
         // populate class variables
-        subject = findViewById(R.id.class_view_subject);
-        professor = findViewById(R.id.class_view_professor);
-        subject.setText(mClass.getSubject());
-        professor.setText(mClass.getProfName());
+        txtSubject = findViewById(R.id.class_view_subject);
+        txtProf = findViewById(R.id.class_view_professor);
+        txtGrade = findViewById(R.id.txt_grade);
+        txtDates = findViewById(R.id.txt_dates);
+        txtLocation = findViewById(R.id.txt_location);
 
-        // populate the parents for the expandable list
-        generateGradingScheme();
+        txtSubject.setText(mClass.getSubject());
+        txtProf.setText(mClass.getProfName());
+        txtDates.setText(timeDate);
+        if (mClass.getWeightedGrade() == 0)
+            txtGrade.setText("100%");
+        else
+            txtGrade.setText(String.valueOf(mClass.getWeightedGrade()) + "%");
+
+        // populate the parents and childs for the expandable list
+        updateGradingScheme();
+        updateGrades();
         expListAdapter = new ExpandableListAdapter(this, expListParent, expListChild);
         expListView.setAdapter(expListAdapter);
-        // add a new grade score click listener
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        expListAdapter.mListener = new OnImageClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                final String parentTitle = (String) expListAdapter.getGroup(groupPosition);
-                Log.i(TAG, "setOnGroupClickListener:true");
+            public void OnImageClicked(int pos) {
+                final String parentTitle = (String) expListAdapter.getGroup(pos);
+                Log.i(TAG, "setOnGroupClickListener:true" +  expListAdapter.getGroupId(pos));
                 LayoutInflater inf = LayoutInflater.from(classView.this);
                 View dialogView = inf.inflate(R.layout.builder_add_grade_score, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(classView.this, R.style.AlertDialogTheme);
@@ -101,20 +107,35 @@ public class classView extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String newGradeScore = input.getText().toString();
                         generateScores(parentTitle, newGradeScore);
+                        // update grades
+                        mClass.calculateGrade();
+                        if (mClass.getWeightedGrade() == 0)
+                            txtGrade.setText("100%");
+                        else
+                            txtGrade.setText(String.valueOf(mClass.getWeightedGrade()) + "%");
+                        // update database
+                        classRef.child(mClass.getChildId()).setValue(mClass);
                     }
                 });
-
-
                 builder.show();
-
-                return true;
             }
-        });
-
-
+        };
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // expand the views
+        for (int j = 0; j < expListAdapter.getGroupCount(); ++j){
+            Log.i(TAG, "groupCount: " + expListAdapter.getChildrenCount(j));
+            // check if group has children, if not -- skip
+            //if (expListAdapter.getChildrenCount(j) != 0)
+            expListView.expandGroup(j);
+        }
+    }
+
     // populates the parent titles in the expandable list view
-    private void generateGradingScheme(){
+    private void updateGradingScheme(){
         if (mClass.getAttendanceWeight() > 0){
             expListParent.add("Attendance");
         }
@@ -137,72 +158,79 @@ public class classView extends AppCompatActivity {
             expListParent.add("Quizzes");
         }
     }
+
+    // updats the list of grades with expListChild
+    public void updateGrades(){
+        for (int i = 0; i < expListParent.size(); ++i) {
+            String parentTitle = expListParent.get(i);
+            if (parentTitle.equals("Attendance")){
+                // add to hashmap and update list
+                expListChild.put(parentTitle, mClass.attendanceList);
+            }
+            else if (parentTitle.equals("Exams")){
+                expListChild.put(parentTitle, mClass.examsList);
+            }
+            else if (parentTitle.equals("Final Exam")){
+                expListChild.put(parentTitle, mClass.finalList);
+            }
+            else if (parentTitle.equals("Homework")){
+                expListChild.put(parentTitle, mClass.homeworkList);
+            }
+            else if (parentTitle.equals("Midterm Exams")){
+                expListChild.put(parentTitle, mClass.midtermsList);
+            }
+            else if (parentTitle.equals("Projects")){
+                expListChild.put(parentTitle, mClass.projectsList);
+            }
+            else if (parentTitle.equals("Quizzes")){
+                expListChild.put(parentTitle, mClass.quizzesList);
+            }
+        }
+    }
     // constructs the childs inside the expandable list view
     private void generateScores(String parentTitle, String input){
         if (parentTitle.equals("Attendance")){
             Log.i(TAG, "generateScores:Attendance:true");
             // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.attendance.size() + 1, input);
-            mClass.attendance.add(grade);
+            mClass.attendanceList.add(input);
             // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.attendance);
-            expListAdapter = new ExpandableListAdapter(this, expListParent, expListChild);
-            expListView.setAdapter(expListAdapter);
+            expListChild.put(parentTitle, mClass.attendanceList);
+            expListAdapter.notifyDataSetChanged();
         }
         else if (parentTitle.equals("Exams")){
             Log.i(TAG, "generateScores:Exams:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.exams.size() + 1, input);
-            mClass.exams.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.exams);
-            expListAdapter = new ExpandableListAdapter(classView.this, expListParent, expListChild);
+            mClass.examsList.add(input);
+            expListChild.put(parentTitle, mClass.examsList);
             expListAdapter.notifyDataSetChanged();
-            expListView.setAdapter(expListAdapter);
         }
         else if (parentTitle.equals("Final Exam")){
             Log.i(TAG, "generateScores:Final Exam:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.finals.size() + 1, input);
-            mClass.finals.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.finals);
+            mClass.finalList.add(input);
+            expListChild.put(parentTitle, mClass.finalList);
             expListAdapter.notifyDataSetChanged();
         }
         else if (parentTitle.equals("Homework")){
             Log.i(TAG, "generateScores:Homework:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.homework.size() + 1, input);
-            mClass.homework.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.homework);
+            mClass.homeworkList.add(input);
+            expListChild.put(parentTitle, mClass.homeworkList);
             expListAdapter.notifyDataSetChanged();
         }
         else if (parentTitle.equals("Midterm Exams")){
             Log.i(TAG, "generateScores:Midterms:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.midterms.size() + 1, input);
-            mClass.midterms.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.midterms);
+            mClass.midtermsList.add(input);
+            expListChild.put(parentTitle, mClass.midtermsList);
             expListAdapter.notifyDataSetChanged();
         }
         else if (parentTitle.equals("Projects")){
             Log.i(TAG, "generateScores:Projects:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.projects.size() + 1, input);
-            mClass.projects.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.projects);
+            mClass.projectsList.add(input);
+            expListChild.put(parentTitle, mClass.projectsList);
             expListAdapter.notifyDataSetChanged();
         }
         else if (parentTitle.equals("Quizzes")){
             Log.i(TAG, "generateScores:Quizzes:true");
-            // add the type of scheme plus the number of occurrences, and the score (input)
-            GradeType grade = new GradeType(parentTitle + " " + mClass.quizzes.size() + 1, input);
-            mClass.quizzes.add(grade);
-            // add to hashmap and update list
-            expListChild.put(parentTitle, mClass.quizzes);
+            mClass.quizzesList.add(input);
+            expListChild.put(parentTitle, mClass.quizzesList);
             expListAdapter.notifyDataSetChanged();
         }
     }

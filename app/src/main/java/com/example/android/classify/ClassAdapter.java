@@ -36,8 +36,14 @@ public class ClassAdapter extends ArrayAdapter<ClassStructure> {
 
         // populate data
         className.setText(c.getSubject());
-        grade.setText("A+");
-        ratingBar.setRating(5.0f);
+        if (c.getLetterGrade().equals(""))
+            grade.setText("A+");
+        else
+            grade.setText(c.getLetterGrade());
+        if (c.getRating() == 0)
+            ratingBar.setRating(5.0f);
+        else
+            ratingBar.setRating(c.getRating());
         return convertView;
     }
 }

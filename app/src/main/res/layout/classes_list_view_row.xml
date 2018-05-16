@@ -39,7 +39,7 @@
         android:scaleX="1.2"
         android:scaleY="1.2"
         android:layout_below="@id/txt_class"
-        android:layout_marginStart="42dp"
+        android:layout_marginStart="38dp"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:theme="@style/AppThemeRatingBar"/>
 </RelativeLayout>

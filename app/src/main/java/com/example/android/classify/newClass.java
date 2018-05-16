@@ -224,6 +224,7 @@ public class newClass extends AppCompatActivity {
 
                 // create unique id for this class to be used in the database
                 String classId = databaseClasses.push().getKey();
+                newClass.setChildId(classId);
                 databaseClasses.child(classId).setValue(newClass);
                 Log.i(TAG, "DatabaseClasses added with ID: " + classId);
                 startActivity(new Intent(newClass.this, MainActivity.class));
