@@ -3,7 +3,7 @@
     <color name="colorPrimaryDark">#42a5f5</color>
     <!-- previous primary dark - #303F9F -->
     <color name="colorPrimary">#000b7b</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#42A5f5</color>
     <color name="LightSkyBlue">#87cefa</color>
     <color name="Black">#000000</color>
     <color name="White">#FFFFFF</color>

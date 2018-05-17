@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.util.Log;
@@ -36,11 +37,16 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton classButton;
     FloatingActionButton reminderButton;
     FloatingActionMenu menuButton;
+    static boolean calledAlready = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!calledAlready) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            calledAlready = true;
+        }
         databaseClasses = FirebaseDatabase.getInstance().getReference("classes");
         classList = new ArrayList<>();
         classButton = (FloatingActionButton) findViewById(R.id.menu_class);
@@ -80,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent classIntent = new Intent(MainActivity.this, classView.class);
                 classIntent.putExtra("passedClass", c);
                 startActivity(classIntent);
+            }
+        });
+
+        classListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //AlertDialog
+                return false;
             }
         });
     }
@@ -137,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             reminderButton.setImageDrawable(whiteIcon);
 
         }
-        else if (classListView.getCount() > 1) {
+        else if (classListView.getCount() > 0) {
             //this.getSupportActionBar().show();
             // set menu color back to default
             menuButton.setMenuButtonColorNormalResId(R.color.colorPrimaryDark);

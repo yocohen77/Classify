@@ -33,7 +33,8 @@
             android:label="Add a new reminder" />
         <activity
             android:name=".MainActivity"
-            android:label="My Classes" />
+            android:label="My Classes"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

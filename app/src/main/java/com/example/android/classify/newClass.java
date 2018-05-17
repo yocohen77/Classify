@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,9 +22,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
+import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
+import com.nex3z.togglebuttongroup.button.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -39,7 +45,7 @@ public class newClass extends AppCompatActivity {
      * @param weightInput grabs the weight from an edit text field and passes it to an array adapter
      */
     int hour, minute;
-    String format, days, weightInput;
+    String format, weightInput;
     int spinnerPos;
     ClassStructure newClass = new ClassStructure();
 
@@ -49,11 +55,18 @@ public class newClass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_class);
+        // set up an up button
+        Toolbar myToolBar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolBar.setTitle("");
+        setSupportActionBar(myToolBar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
 
         final TextInputEditText className = (TextInputEditText) findViewById(R.id.editName);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
-        final TextView classDate = (TextView) findViewById(R.id.editDate);
+        //final TextView classDate = (TextView) findViewById(R.id.editDate);
         final TextInputEditText profName = (TextInputEditText) findViewById(R.id.editProf);
         final Button saveButton = (Button) findViewById(R.id.saveButton);
 
@@ -88,24 +101,7 @@ public class newClass extends AppCompatActivity {
 
             }
         });
-        // create a dialog for days of week picker
-        classDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                // create a dialog
-                final CustomDayPicker cdp = new CustomDayPicker(newClass.this);
-                cdp.show();
-                cdp.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        days = cdp.days;
-                        classDate.setText(days);
-                    }
-                });
-                Log.i(TAG, "classDate:setOnClickListener:" + cdp.days);
 
-            }
-        });
         final Spinner spinner = findViewById(R.id.rubric_spinner);
         // create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rubric_array, R.layout.spinner_item);
@@ -216,7 +212,7 @@ public class newClass extends AppCompatActivity {
                 String updateSubject = className.getText().toString();
                 String updateStart = startTime.getText().toString();
                 String updateEnd = endTime.getText().toString();
-                String updateDate = classDate.getText().toString();
+                String updateDate = getCheckedDays();
                 newClass.setProf(updateProf);
                 newClass.setTimes(updateStart, updateEnd);
                 newClass.setSubject(updateSubject);
@@ -229,10 +225,43 @@ public class newClass extends AppCompatActivity {
                 Log.i(TAG, "DatabaseClasses added with ID: " + classId);
                 startActivity(new Intent(newClass.this, MainActivity.class));
                 finish();
+
             }
         });
     }
 
+    // get the chosen dates from the multi-group weekday buttons
+    public String getCheckedDays(){
+        ToggleButton daysOfWeek[] = new ToggleButton[7];
+        String days, temp = "";
+        daysOfWeek[0] = findViewById(R.id.sun);
+        daysOfWeek[1] = findViewById(R.id.mon);
+        daysOfWeek[2] = findViewById(R.id.tue);
+        daysOfWeek[3] = findViewById(R.id.wed);
+        daysOfWeek[4] = findViewById(R.id.thu);
+        daysOfWeek[5] = findViewById(R.id.fri);
+        daysOfWeek[6] = findViewById(R.id.sat);
+        for (int i = 0; i < 7; ++i){
+            if (daysOfWeek[i].isChecked()){
+                if (i == 0)
+                    temp += "Sun, ";
+                if (i == 1)
+                    temp += "Mon, ";
+                if (i == 2)
+                    temp += "Tue, ";
+                if (i == 3)
+                    temp += "Wed, ";
+                if (i == 4)
+                    temp += "Thu, ";
+                if (i == 5)
+                    temp += "Fri, ";
+                if (i == 6)
+                    temp += "Sat, ";
+            }
+        }
+        days = temp.substring(0, temp.length()-2);
+        return days;
+    }
 
     // auxiliary functions
     public void selectedTimeFormat(int minute) {

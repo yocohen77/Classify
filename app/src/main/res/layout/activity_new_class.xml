@@ -4,152 +4,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     tools:context="com.example.android.classify.newClass">
 
-    <!-- Structural guidelines -->
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="48dp" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/AppTheme">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="579dp" />
+        <TextView
+            android:id="@+id/add_new_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_new_class"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/White" />
+    </android.support.v7.widget.Toolbar>
 
-    <!-- Class image icon and textview -->
+    <!-- Class Name & Color palette -->
     <ImageView
-        android:id="@+id/class_image"
-        style="@style/icon_dim"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/date_image"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/classNameInput"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        android:id="@+id/color_palette"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_gravity="center|end"
+        android:background="@drawable/color_palette"
+        android:layout_marginStart="32dp"
+        app:layout_constraintTop_toBottomOf="@id/classNameInput"
+        app:layout_constraintLeft_toRightOf="@id/editProfLayout"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/classNameInput"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginRight="16dp"
-        android:textColorHint="@color/Gray"
-        app:layout_constraintBottom_toTopOf="@id/editDate"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textColorHint="@color/bpDark_gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Class name" />
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_edit_small"
+            android:drawableTint="@color/bpLight_gray"
+            android:ems="15"
+            android:hint="Class name"
+            android:textSize="14sp" />
     </android.support.design.widget.TextInputLayout>
-    <!-- Date image icon and custom date picker -->
-    <ImageView
-        android:id="@+id/date_image"
-        style="@style/icon_dim"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/startTime"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/editDate"
-        app:layout_constraintTop_toBottomOf="@+id/classNameInput"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-    <TextView
-        android:id="@+id/editDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:hint="Days"
-        android:inputType="date"
-        android:paddingLeft="4dp"
-        android:textColor="@color/Gray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/startTime"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/classNameInput" />
-
-    <!-- Start and end time icon and time picker view -->
-    <ImageView
-        android:id="@+id/time_image"
-        style="@style/icon_dim"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editProfLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/editDate"
-        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
-
-    <TextView
-        android:id="@+id/startTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:hint="Start"
-        android:paddingLeft="4dp"
-        android:textColor="@color/Gray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/editProfLayout"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toLeftOf="@id/endTime"
-        app:layout_constraintTop_toBottomOf="@id/editDate" />
-
-    <TextView
-        android:id="@+id/endTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editDate"
-        android:layout_marginRight="16dp"
-        android:hint="End"
-        android:textColor="@color/Gray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/editProfLayout"
-        app:layout_constraintLeft_toRightOf="@id/startTime"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editDate" />
 
     <!-- Professor name and icon -->
-    <ImageView
-        android:id="@+id/contact_image"
-        style="@style/icon_dim"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/rubric_spinner"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/startTime"
-        app:srcCompat="@drawable/ic_person_outline" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/editProfLayout"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
-        android:textColorHint="@color/Gray"
-        app:layout_constraintBottom_toTopOf="@+id/rubric_spinner"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/startTime">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColorHint="@color/bpDark_gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classNameInput">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editProf"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Professor" />
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_person_outline_small"
+            android:ems="15"
+            android:hint="@string/professor"
+            android:textSize="14sp" />
     </android.support.design.widget.TextInputLayout>
+    <!-- Location -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/editLocationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColorHint="@color/bpDark_gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editProfLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_location_small"
+            android:ems="15"
+            android:hint="@string/location"
+            android:textSize="14sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Date image icon and custom date picker -->
+
+    <TextView
+        android:id="@+id/select_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/time_and_date"
+        android:textAppearance="@style/medium_bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editLocationLayout" />
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/group_weekdays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/select_date_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:tbgChildSpacing="4dp">
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/mon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"/>
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/tue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"/>
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="W"/>
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/thu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"/>
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/fri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F"/>
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/sat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"/>
+    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+    <!-- Start and end time icon and time picker view -->
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="21dp"
+        android:text="@string/start_time"
+        android:textColor="@color/bpDark_gray"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/group_weekdays" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_time"
+        android:textColor="@color/bpDark_gray"
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toRightOf="@id/startTime"
+        app:layout_constraintTop_toBottomOf="@id/group_weekdays" />
 
     <!-- Grading rubric, includes:
         A grading icon
@@ -157,43 +191,41 @@
         A listview that holds the chosen rubric
         Listview row layout is implented in grading_list_view_row.xml_row.xml
      -->
-    <ImageView
-        android:id="@+id/grades_image"
-        style="@style/icon_dim"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+
+    <TextView
+        android:id="@+id/select_grade_weights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        android:text="@string/time_and_date"
+        android:textAppearance="@style/medium_bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/editProfLayout"
-        app:srcCompat="@drawable/ic_grade" />
+        app:layout_constraintTop_toBottomOf="@id/startTime" />
+
 
     <Spinner
         android:id="@+id/rubric_spinner"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:paddingLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:prompt="@string/spinnerTitle"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/list_view"
-        app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editProfLayout" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_grade_weights" />
 
     <ListView
         android:id="@+id/list_view"
         style="@style/ListView"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rubric_spinner" />
     <!-- android:visibility="invisible" -->
 
@@ -203,7 +235,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="Save"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -24,7 +24,14 @@
         <item>Quizzes</item>
     </string-array>
     <string name="title_activity_login">Sign in</string>
-
+    <!-- Strings related to new class -->
+    <string name="add_new_class">Add a new class</string>
+    <string name="location">Location</string>
+    <string name="professor">Professor</string>
+    <string name="time_and_date">Select date and time</string>
+    <string name="start_time">Start</string>
+    <string name="end_time">End</string>
+    <string name="select_grade_weights">Select grade weights</string>
     <!-- Strings related to class view -->
     <string name="grade_standing">Grades received for this class</string>
     <string name="add_new_grade">Add a new grade</string>

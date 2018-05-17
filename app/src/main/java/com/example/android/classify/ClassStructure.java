@@ -126,14 +126,11 @@ public class ClassStructure implements Serializable {
                 sum = 0;
                 for (int i = 0; i < quizzesList.size(); ++i) {
                     sum = Integer.parseInt(quizzesList.get(i)) + sum;
-                    Log.i("ClassifyStructure", "sum is: " + sum);
                     count++;
                 }
                 sum = sum / count;
                 tempWeight = quizWeight / 100;
-                Log.i("ClassifyStructure", "sum average is: " + sum + " and temp weight: " + tempWeight);
                 result = result + (tempWeight * sum);
-                Log.i("ClassifyStructure", "result is: " + result);
             } else {
                 sum = 100;
                 tempWeight = quizWeight / 100;
