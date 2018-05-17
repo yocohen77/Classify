@@ -8,4 +8,5 @@ package com.example.android.classify;
  */
 public interface OnImageClickListener {
     public void OnImageClicked(int group_id);
+    public void OnChildImageClicked(int group_id, int child_id);
 }

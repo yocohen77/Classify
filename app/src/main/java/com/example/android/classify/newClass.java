@@ -64,6 +64,7 @@ public class newClass extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
 
         final TextInputEditText className = (TextInputEditText) findViewById(R.id.editName);
+        final TextInputEditText location = (TextInputEditText) findViewById(R.id.editLocation);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         //final TextView classDate = (TextView) findViewById(R.id.editDate);
@@ -210,12 +211,14 @@ public class newClass extends AppCompatActivity {
             public void onClick(View view) {
                 String updateProf = profName.getText().toString();
                 String updateSubject = className.getText().toString();
+                String updateLocation = location.getText().toString();
                 String updateStart = startTime.getText().toString();
                 String updateEnd = endTime.getText().toString();
                 String updateDate = getCheckedDays();
                 newClass.setProf(updateProf);
                 newClass.setTimes(updateStart, updateEnd);
                 newClass.setSubject(updateSubject);
+                newClass.setLocation(updateLocation);
                 newClass.setDays(updateDate);
 
                 // create unique id for this class to be used in the database

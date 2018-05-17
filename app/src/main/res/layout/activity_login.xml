@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.WhiteAccent"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/classify_image"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/email_login_form"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/email_login_form"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classify_image" />
 
     <LinearLayout
         android:id="@+id/email_login_form"
@@ -47,16 +47,16 @@
 
             <EditText
                 android:id="@+id/email"
+                style="@style/RegLoginEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="40dp"
                 android:drawableStart="@drawable/ic_mail_outline_white_24dp"
                 android:gravity="center"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true"
-                style="@style/RegLoginEditText" />
+                android:paddingEnd="40dp"
+                android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -67,19 +67,19 @@
 
             <EditText
                 android:id="@+id/password"
+                style="@style/RegLoginEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_lock_outline_black_24dp"
                 android:gravity="center"
                 android:hint="@string/prompt_password"
                 android:imeActionId="6"
-                android:imeActionLabel="@string/action_register"
+                android:imeActionLabel="@string/action_log_in"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingBottom="20dp"
-                android:singleLine="true"
-                style="@style/RegLoginEditText" />
+                android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="300dp" />
+        app:layout_constraintGuide_end="300dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/top_image_guideline"

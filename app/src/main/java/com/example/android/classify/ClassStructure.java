@@ -15,6 +15,7 @@ public class ClassStructure implements Serializable {
     private String subject;
     private String timeStart, timeEnd;
     private String days;
+    private String location;
     private String childId;
     private String letterGrade;
     private float quizWeight, examWeight, midtermWeight, finalWeight, projectWeight, homeworkWeight, attendanceWeight;
@@ -49,6 +50,8 @@ public class ClassStructure implements Serializable {
     public String getSubject(){
         return subject;
     }
+    public void setLocation(String l) { location = l; }
+    public String getLocation() { return location; }
     public void setDays (String d){
         days = d;
     }
@@ -115,7 +118,7 @@ public class ClassStructure implements Serializable {
     public float getRating(){ return rating; };
 
     public void calculateGrade() {
-        float tempWeight, result = 0, sum = 0;
+        float tempWeight, sum, result = 0;
         int count;
         // first check if a weight was entered
         if (quizWeight > 0) {

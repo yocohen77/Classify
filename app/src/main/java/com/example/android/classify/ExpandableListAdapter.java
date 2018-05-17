@@ -95,7 +95,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
         Log.i("Testing", "getChildView:true");
         String gradeType = "";
@@ -124,8 +124,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView txtGradeType = (TextView) convertView.findViewById(R.id.txt_grade);
         TextView txtGradeScore = (TextView) convertView.findViewById(R.id.txt_grade_score);
+        ImageView imgDeleteChild = (ImageView) convertView.findViewById(R.id.img_delete_grade);
         txtGradeType.setText(gradeType);
         txtGradeScore.setText(gradeScore);
+        imgDeleteChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.OnChildImageClicked(groupPosition, childPosition);
+            }
+        });
+
         return convertView;
     }
 

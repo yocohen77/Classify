@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +55,7 @@ public class classView extends AppCompatActivity {
         Toolbar myToolBar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolBar.setTitle("");
         setSupportActionBar(myToolBar);
+
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
@@ -74,6 +76,7 @@ public class classView extends AppCompatActivity {
 
         txtSubject.setText(mClass.getSubject());
         txtProf.setText(mClass.getProfName());
+        txtLocation.setText(mClass.getLocation());
         txtDates.setText(timeDate);
         if (mClass.getWeightedGrade() == 0)
             txtGrade.setText("100%");
@@ -118,6 +121,35 @@ public class classView extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+            @Override
+            public void OnChildImageClicked(int groupPos, int childPos){
+                Toast.makeText(classView.this, expListAdapter.getGroup(groupPos) + " " + childPos+1 + " removed.", Toast.LENGTH_SHORT).show();
+//                String parentTitle = (String) expListAdapter.getGroup(groupPos);
+//                if (parentTitle.equals("Attendance")){
+//                    // remove child from list inside the class
+//                    mClass.attendanceList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Exams")){
+//                    mClass.examsList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Final Exam")){
+//                    mClass.finalList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Homework")){
+//                    mClass.homeworkList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Midterm Exams")){
+//                    mClass.midtermsList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Projects")){
+//                    mClass.projectsList.remove(childPos);
+//                }
+//                else if (parentTitle.equals("Quizzes")){
+//                    mClass.quizzesList.remove(childPos);
+//                }
+//                updateGrades();
+//                mClass.calculateGrade();
             }
         };
     }
